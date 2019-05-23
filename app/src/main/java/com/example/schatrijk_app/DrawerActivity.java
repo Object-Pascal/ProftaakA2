@@ -2,6 +2,9 @@ package com.example.schatrijk_app;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,7 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class DashboardActivity extends AppCompatActivity
+public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
@@ -28,6 +31,8 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        displaySelectedScreen(R.id.nav_dashboard);
     }
 
     @Override
@@ -53,14 +58,28 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        displaySelectedScreen(item.getItemId());
+        return true;
+    }
 
-        if (id == R.id.nav_dashboard) {
+    private void displaySelectedScreen(int itemId) {
+        Fragment fragment = null;
+        switch (itemId) {
+            case R.id.nav_dashboard:
+                fragment = new DashboardFragment();
+                break;
+            case R.id.nav_kortingen:
+                fragment = new KortingenFragment();
+                break;
+        }
 
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_main, fragment);
+            ft.commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }

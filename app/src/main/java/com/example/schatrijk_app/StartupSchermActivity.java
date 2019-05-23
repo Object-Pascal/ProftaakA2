@@ -25,7 +25,7 @@ public class StartupSchermActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO: Check if the sensors exist and are in working order
                 if (true) {
-                    Intent i = new Intent(getApplicationContext(), new DashboardActivity().getClass());
+                    Intent i = new Intent(getApplicationContext(), new DrawerActivity().getClass());
                     startActivity(i);
                 }
             }
