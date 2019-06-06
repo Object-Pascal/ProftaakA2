@@ -6,7 +6,7 @@ public class RiddleQuest extends Quest {
     private String riddle;
     private LocationBounds locationBounds;
 
-    public RiddleQuest(String riddle, int questId) {
+    public RiddleQuest(String riddle, int questId, LocationBounds bounds) {
         super(questId);
         this.riddle = riddle;
     }

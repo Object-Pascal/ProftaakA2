@@ -45,17 +45,3 @@ public class QuestSystem {
         return instance;
     }
 }
-
-class QuestLine implements java.io.Serializable {
-    private Stack<Quest> quests;
-    private UUID questLineId;
-
-    public QuestLine(Stack<Quest> quests, UUID questLineId) {
-        this.quests = quests;
-        this.questLineId = questLineId;
-    }
-
-    public Quest getCurrentQuest() {
-        return quests.peek();
-    }
-}

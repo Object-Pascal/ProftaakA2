@@ -11,7 +11,7 @@ public class TreasureLocations {
         firstLocationHogeschool.setLongitude(4.797117);
 
         LocationBounds[] locations = {
-
+            new LocationBounds(50, firstLocationHogeschool)
         };
 
         return locations;
