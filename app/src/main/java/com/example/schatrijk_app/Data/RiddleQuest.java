@@ -9,9 +9,10 @@ public class RiddleQuest extends Quest {
     public RiddleQuest(String riddle, int questId, LocationBounds bounds) {
         super(questId);
         this.riddle = riddle;
+        this.locationBounds = bounds;
     }
 
-    public void verify(Object... params) throws TypeNotPresentException {
+    public boolean verify(Object... params) throws TypeNotPresentException {
         if (!params[0].getClass().equals(Location.class)) {
             throw new TypeNotPresentException(params[0].getClass().getName(), new Throwable("Invalid location type passed"));
         }
@@ -20,6 +21,7 @@ public class RiddleQuest extends Quest {
                 completed = true;
             }
         }
+        return completed;
     }
 
     public String getRiddle() {

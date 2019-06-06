@@ -1,6 +1,8 @@
 package com.example.schatrijk_app.Data;
 
-public abstract class Quest {
+import java.io.Serializable;
+
+public abstract class Quest implements Serializable {
     protected boolean completed;
     protected int questId;
 
@@ -9,5 +11,5 @@ public abstract class Quest {
         this.questId = questId;
     }
 
-    public abstract void verify(Object... params);
+    public abstract boolean verify(Object... params);
 }

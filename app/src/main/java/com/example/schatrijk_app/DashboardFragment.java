@@ -61,10 +61,11 @@ public class DashboardFragment extends Fragment {
                 Bundle fragmentBundle = new Bundle();
                 QuestLine dummyQuestLine = QuestLines.getDefaultQuestLine();
                 fragmentBundle.putString("riddle_text", ((RiddleQuest)dummyQuestLine.getCurrentQuest()).getRiddle());
+                fragmentBundle.putSerializable("quest_object", dummyQuestLine.getCurrentQuest());
 
                 if (dummyQuestLine.getCurrentQuest() instanceof RiddleQuest) {
-                    fragmentBundle.putBoolean("riddle_state", true);
-                    fragmentBundle.putBoolean("compass_state", false);
+                    fragmentBundle.putBoolean("riddle_state", false);
+                    fragmentBundle.putBoolean("compass_state", true);
                     fragmentBundle.putBoolean("qr_state", false);
                 }
                 /*else if (dummyQuestLine.getCurrentQuest() instanceof CompassQuest) {
