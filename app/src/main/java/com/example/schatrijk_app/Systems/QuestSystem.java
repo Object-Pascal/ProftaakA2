@@ -2,7 +2,8 @@ package com.example.schatrijk_app.Systems;
 
 import android.util.Log;
 
-import java.io.Serializable;
+import com.example.schatrijk_app.Data.Quest;
+
 import java.util.Stack;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ public class QuestSystem {
         currentQuestLine = null;
         try {
             QuestLine foundQuestLine = FileSystem.retrieveQuestLine();
+
             if (foundQuestLine != null)
                 currentQuestLine = foundQuestLine;
         }
@@ -27,8 +29,12 @@ public class QuestSystem {
         }
     }
 
-    public synchronized void openCurrentQuest() {
-        currentQuestLine.getCurrentQuest();
+    public synchronized Quest getCurrentQuest() {
+        return currentQuestLine == null ? null : currentQuestLine.getCurrentQuest();
+    }
+
+    public synchronized QuestLine getCurrentQuestLine() {
+        return currentQuestLine;
     }
 
     private static QuestSystem instance;
@@ -41,23 +47,15 @@ public class QuestSystem {
 }
 
 class QuestLine implements java.io.Serializable {
-    private Stack<Object> quests;
+    private Stack<Quest> quests;
     private UUID questLineId;
 
-    public QuestLine(Stack<Object> quests, UUID questLineId) {
+    public QuestLine(Stack<Quest> quests, UUID questLineId) {
         this.quests = quests;
         this.questLineId = questLineId;
     }
 
-    public Object getCurrentQuest() {
+    public Quest getCurrentQuest() {
         return quests.peek();
-    }
-}
-
-class Quest implements Serializable {
-    private UUID questId;
-
-    public Quest(UUID questId) {
-        this.questId = questId;
     }
 }

@@ -11,8 +11,7 @@ public class LocationBounds {
         this.centerLocation = centerLocation;
     }
 
-    public boolean checkInsideBounds(Location location)
-    {
+    public boolean checkInsideBounds(Location location) {
         float distanceInMeters = centerLocation.distanceTo(location);
         return distanceInMeters <= radiusInMeters;
     }
