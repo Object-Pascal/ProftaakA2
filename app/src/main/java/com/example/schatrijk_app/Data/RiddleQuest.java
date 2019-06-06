@@ -21,4 +21,12 @@ public class RiddleQuest extends Quest {
             }
         }
     }
+
+    public String getRiddle() {
+        return riddle;
+    }
+
+    public LocationBounds getLocationBounds() {
+        return locationBounds;
+    }
 }

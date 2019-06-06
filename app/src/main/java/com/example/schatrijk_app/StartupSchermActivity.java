@@ -23,11 +23,11 @@ public class StartupSchermActivity extends AppCompatActivity {
         btnParticipate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Check if the sensors exist and are in working order
-                if (true) {
-                    Intent i = new Intent(getApplicationContext(), new DrawerActivity().getClass());
-                    startActivity(i);
-                }
+            // TODO: Check if the sensors exist and are in working order
+            if (true) {
+                Intent i = new Intent(getApplicationContext(), new DrawerActivity().getClass());
+                startActivity(i);
+            }
             }
         });
     }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TreasureHuntFragment extends Fragment {
     @Nullable
@@ -30,7 +31,16 @@ public class TreasureHuntFragment extends Fragment {
 
         boolean riddleStage = false;
         boolean compassStage = false;
-        boolean qrCodeStage = true;
+        boolean qrCodeStage = false;
+
+        try {
+            riddleStage = getArguments().getBoolean("riddle_state");
+            compassStage = getArguments().getBoolean("compass_state");
+            qrCodeStage = getArguments().getBoolean("qr_state");
+        }
+        catch (NullPointerException e) {
+            Toast.makeText(getContext(), "Er is een probleem opgetreden.", Toast.LENGTH_SHORT);
+        }
 
         if (riddleStage) {
             txtRiddle.setVisibility(View.VISIBLE);
@@ -39,7 +49,7 @@ public class TreasureHuntFragment extends Fragment {
             imgCompass.setVisibility(View.GONE);
             imgArrow.setVisibility(View.GONE);
 
-            txtRiddle.setText("<raadsel_plek>");
+            txtRiddle.setText(getArguments().getString("riddle_text"));
         }
         else if (compassStage) {
             txtRiddle.setVisibility(View.GONE);

@@ -16,6 +16,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.schatrijk_app.Data.LocationBounds;
+import com.example.schatrijk_app.Data.Quest;
+import com.example.schatrijk_app.Data.QuestLines;
+import com.example.schatrijk_app.Data.RiddleQuest;
+import com.example.schatrijk_app.Systems.QuestLine;
+
 public class DashboardFragment extends Fragment {
     @Nullable
     @Override
@@ -28,6 +34,7 @@ public class DashboardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Dashboard");
         RegisterInteractionEvents();
+        RegisterQuestFetcher();
 
         TextView txtMessage = getActivity().findViewById(R.id.txtmessage);
 
@@ -48,16 +55,43 @@ public class DashboardFragment extends Fragment {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new TreasureHuntFragment();
-                if (fragment != null) {
-                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.content_main, fragment);
-                    ft.commit();
-                }
+            Fragment fragment = new TreasureHuntFragment();
+            if (fragment != null) {
+                // Dummy data
+                Bundle fragmentBundle = new Bundle();
+                QuestLine dummyQuestLine = QuestLines.getDefaultQuestLine();
+                fragmentBundle.putString("riddle_text", ((RiddleQuest)dummyQuestLine.getCurrentQuest()).getRiddle());
 
-                DrawerLayout drawer = getActivity().findViewById(R.id.drawer_layout);
-                drawer.closeDrawer(GravityCompat.START);
+                if (dummyQuestLine.getCurrentQuest() instanceof RiddleQuest) {
+                    fragmentBundle.putBoolean("riddle_state", true);
+                    fragmentBundle.putBoolean("compass_state", false);
+                    fragmentBundle.putBoolean("qr_state", false);
+                }
+                /*else if (dummyQuestLine.getCurrentQuest() instanceof CompassQuest) {
+                    fragmentBundle.putBoolean("riddle_state", false);
+                    fragmentBundle.putBoolean("compass_state", true);
+                    fragmentBundle.putBoolean("qr_state", false);
+                }
+                else if (dummyQuestLine.getCurrentQuest() instanceof QrQuest) {
+                    fragmentBundle.putBoolean("riddle_state", false);
+                    fragmentBundle.putBoolean("compass_state", false);
+                    fragmentBundle.putBoolean("qr_state", true);
+                }*/
+
+                fragment.setArguments(fragmentBundle);
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.commit();
+            }
+
+            DrawerLayout drawer = getActivity().findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
             }
         });
+    }
+
+    private void RegisterQuestFetcher() {
+        // TODO: Timed checker voor het binnenhalen van quests
     }
 }
