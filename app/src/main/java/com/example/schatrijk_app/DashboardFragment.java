@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class DashboardFragment extends Fragment {
 
     private Button button;
+    private Button buttonCompass;
     private TextView resultTV;
 
     @Nullable
@@ -29,6 +30,7 @@ public class DashboardFragment extends Fragment {
 
         resultTV = getView().findViewById(R.id.resultTV);
         button = getView().findViewById(R.id.qrcodebutton);
+        buttonCompass = getView().findViewById(R.id.compassbutton);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,11 +39,23 @@ public class DashboardFragment extends Fragment {
             }
         });
 
+        buttonCompass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCompass();
+            }
+        });
+
     }
 
     public void openQRCode (){
         Intent intent = new Intent(getActivity().getApplicationContext(), QRCode.class);
         intent.putExtra("KEY",345);
+        startActivity(intent);
+    }
+
+    public void openCompass(){
+        Intent intent = new Intent(getActivity().getApplicationContext(), CompassActivity.class);
         startActivity(intent);
     }
 }

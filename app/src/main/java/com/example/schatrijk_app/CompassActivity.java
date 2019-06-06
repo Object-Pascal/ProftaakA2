@@ -7,6 +7,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -42,11 +43,10 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
     private boolean mLastAccelerometerSet = false;
     private boolean mLastMagnetometerSet = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_compass);
 
         kompas = new Compass(getApplicationContext());
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -54,9 +54,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
         testInfo = findViewById(R.id.testInfoTV);
 
         locTV = findViewById(R.id.locationTextView);
-        button = findViewById(R.id.button);
-
-        ActivityCompat.requestPermissions(CompassActivity.this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},123);
+        button = findViewById(R.id.buttonn);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +70,7 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
             }
         });
 
-
+        ActivityCompat.requestPermissions(CompassActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 123);
     }
 
     @Override
@@ -97,15 +95,15 @@ public class CompassActivity extends AppCompatActivity implements SensorEventLis
         kompas = new Compass(getApplicationContext());
         try {
             phoneLocation = kompas.getLocation();
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.d("Exception", e.toString());
         }
 
         if (phoneLocation != null) {
-            kompasAngle = (int)this.kompas.angleBetweenLocations(phoneLocation);
+            kompasAngle = (int) this.kompas.angleBetweenLocations(phoneLocation);
             double lat = phoneLocation.getLatitude();
             double lon = phoneLocation.getLongitude();
-            int distance = (int)this.kompas.distanceBetweenLocations(phoneLocation);
+            int distance = (int) this.kompas.distanceBetweenLocations(phoneLocation);
             locTV.setText("Latitude: " + lat + "\nLongitude: " + lon + "\nDistance: " + distance + "m");
         }
 
