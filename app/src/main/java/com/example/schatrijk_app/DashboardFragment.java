@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class DashboardFragment extends Fragment {
     @Nullable
@@ -18,5 +19,8 @@ public class DashboardFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Dashboard");
+
+        TextView txtMessage = getActivity().findViewById(R.id.txtmessage);
+        txtMessage.setText("Geen schatten in de buurt!");
     }
 }

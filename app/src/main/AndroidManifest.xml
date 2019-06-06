@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name=".DashboardActivity"
+            android:name=".DrawerActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|screenSize|keyboardHidden">
