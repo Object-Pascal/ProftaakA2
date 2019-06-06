@@ -71,6 +71,12 @@ public class DrawerActivity extends AppCompatActivity
             case R.id.nav_kortingen:
                 fragment = new KortingenFragment();
                 break;
+            case R.id.nav_treasure_hunt:
+                fragment = new TreasureHuntFragment();
+                break;
+            case R.id.nav_stop_treasure_hunt:
+                // TODO: Stop zoektocht functie
+                break;
         }
 
         if (fragment != null) {

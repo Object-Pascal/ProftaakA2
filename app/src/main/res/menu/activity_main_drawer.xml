@@ -11,4 +11,13 @@
             android:id="@+id/nav_kortingen"
             android:title="Mijn kortingen"/>
     </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_treasure_hunt"
+            android:title="Zoektocht"/>
+        <item
+            android:id="@+id/nav_stop_treasure_hunt"
+            android:title="Stop zoektocht"/>
+    </group>
 </menu>
