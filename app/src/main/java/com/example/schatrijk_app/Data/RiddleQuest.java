@@ -2,6 +2,10 @@ package com.example.schatrijk_app.Data;
 
 import android.location.Location;
 
+import com.example.schatrijk_app.Systems.CouponSystem;
+
+import java.util.Random;
+
 public class RiddleQuest extends Quest {
     private String riddle;
     private LocationBounds locationBounds;

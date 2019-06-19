@@ -2,19 +2,27 @@ package com.example.schatrijk_app.Systems;
 
 import android.content.Context;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class FileSystem {
     private static Context baseContext;
 
     public static void initialize(Context baseContext) {
-        baseContext = baseContext;
+        FileSystem.baseContext = baseContext;
+    }
+
+    public static File getFile(String fileName) {
+        return new File(baseContext.getFilesDir() + "/" + fileName);
     }
 
     public static void saveQuestLine(QuestLine questLine) throws IOException, NullPointerException {
@@ -57,5 +65,11 @@ public class FileSystem {
         }
         else
             return null;
+    }
+
+    public static String readFile(String path, Charset encoding) throws IOException
+    {
+        byte[] encoded = Files.readAllBytes(Paths.get(path));
+        return new String(encoded, encoding);
     }
 }
