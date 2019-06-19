@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatImageButton;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.schatrijk_app.Data.Coupon;
 import com.example.schatrijk_app.Data.LocationBounds;
 import com.example.schatrijk_app.Data.RiddleQuest;
 import com.example.schatrijk_app.Systems.CouponSystem;

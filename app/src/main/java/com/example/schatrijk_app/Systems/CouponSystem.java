@@ -5,6 +5,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.util.Xml;
 
+import com.example.schatrijk_app.Cryptography.CipherManager;
 import com.example.schatrijk_app.Data.Coupon;
 import com.example.schatrijk_app.Data.Quest;
 
@@ -34,6 +35,7 @@ public class CouponSystem {
         coupons = new ArrayList<>();
         File dataFile = FileSystem.getFile(fileName);
         boolean exists = dataFile.exists();
+
         if (!exists) {
             try {
                 dataFile.createNewFile();
@@ -59,7 +61,7 @@ public class CouponSystem {
             JSONArray couponsArray = new JSONArray(coupons);
 
             for (int i = 0; i < couponsArray.length(); i++) {
-                this.coupons.add(Coupon.parseJson(new JSONObject(new String(Base64.decode(couponsArray.getString(i).getBytes(), Base64.CRLF)))));
+                this.coupons.add(Coupon.parseJson(new JSONObject(CipherManager.decryptString(couponsArray.getString(i)))));
             }
         }
         catch (Exception e) {
@@ -71,12 +73,12 @@ public class CouponSystem {
         Coupon coupon = new Coupon(quest.getRewardType(), UUID.randomUUID(), false);
         JSONObject object = Coupon.asJson(coupon);
 
-        String baseStr = Base64.encodeToString(object.toString().getBytes(), Base64.CRLF);
+        String encryptedData = CipherManager.encryptString(object.toString());
 
         try {
             String content = FileSystem.readFile(FileSystem.getFile(fileName).getAbsolutePath(), Charset.defaultCharset());
             JSONArray array = new JSONArray(content);
-            array.put(baseStr);
+            array.put(encryptedData);
             saveOverwrite(array);
             loadCoupons();
         }
