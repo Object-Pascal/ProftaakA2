@@ -60,8 +60,8 @@
 
     <ImageView
         android:id="@+id/imgcompass"
-        android:layout_width="800px"
-        android:layout_height="800px"
+        android:layout_width="700px"
+        android:layout_height="700px"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -79,8 +79,8 @@
 
     <ImageView
         android:id="@+id/imgarrow"
-        android:layout_width="600px"
-        android:layout_height="600px"
+        android:layout_width="500px"
+        android:layout_height="500px"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -98,8 +98,8 @@
 
     <ImageView
         android:id="@+id/imgphoto"
-        android:layout_width="600px"
-        android:layout_height="600px"
+        android:layout_width="550px"
+        android:layout_height="550px"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -110,6 +110,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.1"
         android:scaleType="centerCrop"
-        android:src="@drawable/dummy_picture"/>
+        android:src="@drawable/dummy_picture_avans_hogeschool"/>
+
+    <Button
+        android:id="@+id/btnEzSwitch"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Switch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

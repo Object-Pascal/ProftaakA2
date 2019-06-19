@@ -2,7 +2,9 @@ package com.example.schatrijk_app.Data;
 
 import android.location.Location;
 
-public class RiddleQuest extends Quest {
+import java.io.Serializable;
+
+public class RiddleQuest extends Quest implements Serializable {
     private String riddle;
     private LocationBounds locationBounds;
 
