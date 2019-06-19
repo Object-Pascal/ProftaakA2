@@ -73,7 +73,7 @@ public class CompassSystem implements SensorEventListener {
             double lat = phoneLocation.getLatitude();
             double lon = phoneLocation.getLongitude();
             System.out.println("Lat: " + lat + "Lon: " + lon);
-            Toast.makeText(listenedActivity, "Lat: " + lat + "Lon: " + lon, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(listenedActivity, "Lat: " + lat + "Lon: " + lon, Toast.LENGTH_SHORT).show();
             int distance = (int) this.compass.distanceBetweenLocations(phoneLocation);
         }
 

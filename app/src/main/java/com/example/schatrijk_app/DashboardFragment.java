@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.AppCompatImageButton;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,6 +22,7 @@ import com.example.schatrijk_app.Data.LocationBounds;
 import com.example.schatrijk_app.Data.Quest;
 import com.example.schatrijk_app.Data.QuestLines;
 import com.example.schatrijk_app.Data.RiddleQuest;
+import com.example.schatrijk_app.Data.SystemStateData;
 import com.example.schatrijk_app.Systems.QuestLine;
 
 public class DashboardFragment extends Fragment {
@@ -64,8 +67,8 @@ public class DashboardFragment extends Fragment {
                 fragmentBundle.putSerializable("quest_object", dummyQuestLine.getCurrentQuest());
 
                 if (dummyQuestLine.getCurrentQuest() instanceof RiddleQuest) {
-                    fragmentBundle.putBoolean("riddle_state", false);
-                    fragmentBundle.putBoolean("compass_state", true);
+                    fragmentBundle.putBoolean("riddle_state", true);
+                    fragmentBundle.putBoolean("compass_state", false);
                     fragmentBundle.putBoolean("qr_state", false);
                 }
                 /*else if (dummyQuestLine.getCurrentQuest() instanceof CompassQuest) {
@@ -81,6 +84,11 @@ public class DashboardFragment extends Fragment {
 
                 fragment.setArguments(fragmentBundle);
 
+                SystemStateData.isTreasureHunting = true;
+                SystemStateData.drawerMenu.findItem(R.id.nav_treasure_hunt).setVisible(true);
+                SystemStateData.drawerMenu.findItem(R.id.nav_stop_treasure_hunt).setVisible(true);
+                SystemStateData.drawerMenu.findItem(R.id.nav_dashboard).setVisible(false);
+
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
                 ft.commit();
@@ -93,6 +101,6 @@ public class DashboardFragment extends Fragment {
     }
 
     private void RegisterQuestFetcher() {
-        // TODO: Timed checker voor het binnenhalen van quests
+        // Hier zou een automatische fetcher systeem komen om dynamisch vanuit een server quests op te halen.
     }
 }
