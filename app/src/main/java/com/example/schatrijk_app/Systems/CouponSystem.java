@@ -85,6 +85,31 @@ public class CouponSystem {
         }
     }
 
+    public void remove(String couponId) {
+        try {
+            String content = FileSystem.readFile(FileSystem.getFile(fileName).getAbsolutePath(), Charset.defaultCharset());
+            JSONArray array = new JSONArray(content);
+
+            int foundIndex = -1;
+            for (int i = 0; i < array.length(); i++) {
+                String jsonDecoded = new String(Base64.decode(array.get(i).toString(), Base64.CRLF));
+                if (new JSONObject(jsonDecoded).get("id").equals(couponId)) {
+                    foundIndex = i;
+                    break;
+                }
+            }
+
+            if (foundIndex > -1) {
+                array.remove(foundIndex);
+                saveOverwrite(array);
+                loadCoupons();
+            }
+        }
+        catch (Exception e) {
+            Log.d("WRITE EXCEPTION", e.getMessage());
+        }
+    }
+
     private void saveOverwrite(JSONArray array) {
         File dataFile = FileSystem.getFile(fileName);
         boolean exists = dataFile.exists();
@@ -116,5 +141,9 @@ public class CouponSystem {
 
     public boolean isInitialized() {
         return initialized;
+    }
+
+    public ArrayList<Coupon> getCoupons() {
+        return coupons;
     }
 }
